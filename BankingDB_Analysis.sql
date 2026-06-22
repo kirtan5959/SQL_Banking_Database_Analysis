@@ -81,10 +81,11 @@ ALTER TABLE Customers
 ADD CONSTRAINT uq_Email UNIQUE (Email);
 DESCRIBE Customers;
 use BankingDB;
-insert into customers
+insert into Customers
 (customerID, firstname, lastname, email, phone, accountcreationdate, dateofbirth)
 values
-(101, 'kirtan', 'more', 'kirtan123@gmail.com', '912345678912', '2025-06-01', '1995-03-15');
+(101, 'kirtan', 'more', 'kirtan123@gmail.com', '912345678912', '2025-06-01', '1995-03-15'),
+(102, 'Priya', 'Patil', 'priya.patil@gmail.com', '9988776655', '2025-05-03', '2000-09-20');
 
  Insert into transactions
  (Transactionid, accountid, transactiondate, amount, transactiontype)
@@ -95,7 +96,13 @@ values
 INSERT INTO Accounts
 (AccountID, CustomerID, AccountType, Balance)
 VALUES
-(201, 101, 'Savings', 25000);
+(201, 101, 'Savings', 25000),
+(202, 102, 'Current', 40000),
+(203, 103, 'Savings', 30000),
+(204, 104, 'Current', 45000),
+(205, 105, 'Savings', 20000),
+(206, 106, 'Current', 50000),
+(207, 107, 'Savings', 35000);
 INSERT INTO Accounts
 (AccountID, CustomerID, AccountType, Balance)
 VALUES
@@ -131,8 +138,45 @@ value
  Where AccountID =202;
  select * from accounts;
  
+ use bankingDB;
+#DQL Demonstration
+select * from coustomers;
+select * from accounts;
+ select * from branches;
+ select * from loans;
+ select * from  accountbranches;
 
+create  database SQL_PRactice; 
+use SQL_PRactice;
+use bankingDB;
+select * from accounts
+where AccountType = 'Savings';
+
+select * from accounts
+where Balance >25000; 
+select * from transactions
+where amount between 5000 and 20000;
+select * from transactions
+where Amount >= 5000 and Amount <= 20000;
+select * from customers
+where CustomerID in (101,102,103);
+SELECT *
+FROM Customers
+WHERE FirstName LIKE 'R%';
  
+select * from customers
+order by FirstName desc;
+
+select * from accounts
+order by Balance desc ;
+ select distinct accountType
+ from accounts;
+ select * from accounts
+ order by Balance desc limit 1 offset 2;
  
+ SELECT *
+FROM Transactions
+LIMIT 5 OFFSET 2;
  
- 
+select * from transactions
+order by Amount desc;
