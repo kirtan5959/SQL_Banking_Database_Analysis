@@ -74,15 +74,56 @@ case when Balance  >=5000 then 'Premium Account'
   
   SELECT AccountID,
        Balance,
-       RANK() OVER (ORDER BY Balance DESC) AS BalanceRank
+       RANK() OVER (ORDER BY Balance ) AS BalanceRank
 FROM Accounts;
 
 SELECT TransactionID,
        Amount,
-       SUM(Amount) OVER (ORDER BY TransactionDate) AS RunningTotal
+       sum(Amount) OVER (ORDER BY TransactionDate) AS RunningTotal
 FROM Transactions;
 
 SELECT TransactionID,
        Amount,
        AVG(Amount) OVER () AS AverageTransaction
 FROM Transactions;
+use bankingDB;
+
+insert into customers
+(CustomerID, Firstname ,Lastname, Email, Accountcreationdate, DateOfBirth)
+values
+(108,'shlok', 'khndagle','shlokkhandagle11@gmail.com','2025-08-25','2006-09-01');
+
+select * from customers
+where FirstName like 'A%';
+
+select * from customers
+where email like 'gmail%';
+
+select * from customers
+where LastName like 'kar%';
+
+SELECT *
+FROM Accounts
+WHERE AccountType IN ('Savings', 'Current');
+
+select * from transactions
+where TransactionType in ('Deposit','Withdrawal');
+
+select * from customers
+where CustomerID in (101,102,105);
+
+SELECT *
+FROM Customers
+ORDER BY LastName ASC;
+
+SELECT *
+FROM Accounts
+WHERE AccountType = 'Savings'
+ORDER BY Balance DESC;
+
+SELECT *
+FROM Customers
+WHERE FirstName LIKE 'S%'
+LIMIT 5;
+
+
