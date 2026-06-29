@@ -32,8 +32,9 @@ CREATE TABLE Transactions_2 (
     TransactionDate DATE,
     Amount DECIMAL(10,2),
     TransactionType VARCHAR(20),
-    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
-);
+    FOREIGN KEY (CustomerID) REFERENCES Customers_2(CustomerID)
+); 
+drop  table Transactions_2;
 INSERT INTO Transactions_2
 (TransactionID, AccountID, CustomerID, TransactionDate, Amount, TransactionType)
 VALUES
@@ -49,4 +50,72 @@ VALUES
 (310, 202, 102, '2025-05-20', 11000.00, 'Payment');
 SELECT * FROM Transactions_2;
 
+select c.CustomerID,
+concat(c.FirstName,' ',c.LastName) as CustomerName,
+TransactionID,
+TransactionType,
+Amount
+from Customers_2 c
+inner join Transactions_2 t
+ON c.CustomerID = t.CustomerID;
 
+SELECT 
+    c.CustomerID,
+    CONCAT(c.FirstName, ' ', c.LastName) AS CustomerName,
+    t.TransactionID,
+    t.TransactionType,
+    t.Amount
+FROM Customers_2 c
+LEFT JOIN Transactions_2 t
+    ON c.CustomerID = t.CustomerID;
+    
+    SELECT 
+    c.CustomerID,
+    CONCAT(c.FirstName, ' ', c.LastName) AS CustomerName,
+    t.TransactionID,
+    t.TransactionType,
+    t.Amount
+FROM Customers_2 c
+Right JOIN Transactions_2 t
+    ON c.CustomerID = t.CustomerID;
+
+SELECT 
+    c.CustomerID,
+    CONCAT(c.FirstName, ' ', c.LastName) AS CustomerName,
+    t.TransactionID,
+    t.TransactionType,
+    t.Amount
+FROM Customers_2 c
+INNER JOIN Transactions_2 t
+    ON c.CustomerID = t.CustomerID
+WHERE t.Amount > (
+    SELECT AVG(Amount)
+    FROM Transactions_2
+)
+ORDER BY t.Amount DESC;
+
+UPDATE Transactions_2
+SET Amount = 75000.00
+WHERE TransactionID = 301;
+
+UPDATE Transactions_2
+SET Amount = 62000.00
+WHERE TransactionID = 307;
+
+UPDATE Transactions_2
+SET Amount = 85000.00
+WHERE TransactionID = 309;
+
+SELECT 
+    c.CustomerID,
+    CONCAT(c.FirstName, ' ', c.LastName) AS CustomerName,
+    t.TransactionID,
+    t.TransactionDate,
+    t.TransactionType,
+    t.Amount
+FROM Customers_2 c
+INNER JOIN Transactions_2 t
+    ON c.CustomerID = t.CustomerID
+WHERE t.TransactionType = 'Deposit'
+  AND t.Amount > 50000
+ORDER BY t.Amount DESC;
