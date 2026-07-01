@@ -42,3 +42,17 @@ VALUES
 
 select * from transactions_2;
 Use bankingDB;
+
+SELECT
+    t.TransactionID,
+    t.CustomerID,
+    CONCAT(c.FirstName,' ',c.LastName) AS CustomerName,
+    c.BanchName,
+    t.TransactionType,
+    t.Amount
+FROM Transactions_2 t
+JOIN Customers_2 c
+ON t.CustomerID = c.CustomerID
+ORDER BY c.BanchName, t.CustomerID;
+
+use bankingDB;

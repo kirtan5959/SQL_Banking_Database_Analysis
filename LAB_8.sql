@@ -119,3 +119,23 @@ INNER JOIN Transactions_2 t
 WHERE t.TransactionType = 'Deposit'
   AND t.Amount > 50000
 ORDER BY t.Amount DESC;
+
+select 
+avg(amount) from transactions_2;
+
+select * from transactions_2;
+
+SELECT
+    c.CustomerID,
+    CONCAT(c.FirstName, ' ', c.LastName) AS CustomerName,
+    t.TransactionID,
+    t.TransactionType,
+    t.Amount
+FROM Customers_2 c
+INNER JOIN Transactions_2 t
+    ON c.CustomerID = t.CustomerID
+WHERE t.Amount > (
+    SELECT AVG(Amount)
+    FROM Transactions_2
+)
+ORDER BY t.Amount DESC;

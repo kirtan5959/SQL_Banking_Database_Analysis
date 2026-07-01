@@ -25,3 +25,4 @@ where Balance >=25000;
 Select AccountType , sum(Balance) as Total_Balance  from Accounts 
 group by AccountType
 having sum(Balance)>25000;
+select * from accounts;

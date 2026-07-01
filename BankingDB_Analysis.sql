@@ -97,12 +97,8 @@ INSERT INTO Accounts
 (AccountID, CustomerID, AccountType, Balance)
 VALUES
 (201, 101, 'Savings', 25000),
-(202, 102, 'Current', 40000),
-(203, 103, 'Savings', 30000),
-(204, 104, 'Current', 45000),
-(205, 105, 'Savings', 20000),
-(206, 106, 'Current', 50000),
-(207, 107, 'Savings', 35000);
+(202, 102, 'Current', 40000);
+
 INSERT INTO Accounts
 (AccountID, CustomerID, AccountType, Balance)
 VALUES
